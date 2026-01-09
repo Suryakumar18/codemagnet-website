@@ -3,8 +3,6 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { IconPlus, IconMinus, IconArrowRight } from "@tabler/icons-react";
 import { NavbarDemo } from "@/app/components-main/Navbar";
-// Import Spline (ensure you run: npm install @splinetool/react-spline @splinetool/runtime)
-import Spline from '@splinetool/react-spline';
 
 export default function PointSolutionsPage() {
   return (
@@ -54,7 +52,7 @@ export default function PointSolutionsPage() {
             <AccordionItem 
               title="DevOps & Infrastructure Audit" 
               number="01"
-              isOpen={true} // Open by default
+              isOpen={true}
             >
               <p>We analyze your CI/CD pipelines and cloud architecture. Our team identifies bottlenecks, security gaps, and cost inefficiencies, implementing automated workflows that reduce deployment time by up to 60%.</p>
             </AccordionItem>
@@ -77,22 +75,52 @@ export default function PointSolutionsPage() {
 
           </motion.div>
 
-          {/* RIGHT SIDE: Robot Animation */}
+          {/* RIGHT SIDE: Static Image Placeholder */}
           <motion.div 
              initial={{ opacity: 0, x: 50 }}
              animate={{ opacity: 1, x: 0 }}
              transition={{ duration: 0.8 }}
-             className="relative w-full h-[500px] lg:h-[600px] rounded-3xl overflow-hidden bg-neutral-900/20 border border-white/10 shadow-[0_0_50px_rgba(175,240,230,0.05)]"
+             className="relative w-full h-[500px] lg:h-[600px] rounded-3xl overflow-hidden bg-gradient-to-br from-neutral-900/20 to-black border border-white/10 shadow-[0_0_50px_rgba(175,240,230,0.05)] flex items-center justify-center"
           >
-             {/* 1. Install Spline: npm install @splinetool/react-spline @splinetool/runtime
-                2. Replace the 'scene' prop below with your specific Robot Animation URL from Spline.design 
-             */}
-             <div className="absolute inset-0 w-full h-full">
-                {/* Placeholder for the Robot Scene */}
-                <Spline scene="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode" />
+             {/* Simple Animated Robot SVG Placeholder */}
+             <div className="relative w-64 h-64">
+                <div className="absolute inset-0 bg-[#aff0e6]/10 rounded-full blur-xl"></div>
+                <svg 
+                   className="relative w-full h-full"
+                   viewBox="0 0 200 200"
+                   fill="none"
+                   xmlns="http://www.w3.org/2000/svg"
+                >
+                   {/* Robot Head */}
+                   <rect x="70" y="50" width="60" height="70" rx="15" fill="url(#gradient1)" stroke="#aff0e6" strokeWidth="2"/>
+                   
+                   {/* Robot Eyes */}
+                   <circle cx="85" cy="75" r="8" fill="#aff0e6" className="animate-pulse"/>
+                   <circle cx="115" cy="75" r="8" fill="#aff0e6" className="animate-pulse"/>
+                   
+                   {/* Robot Antenna */}
+                   <rect x="97" y="30" width="6" height="20" fill="#aff0e6" rx="3"/>
+                   <circle cx="100" cy="25" r="10" fill="#aff0e6" className="animate-ping" style={{animationDuration: '2s'}}/>
+                   
+                   {/* Robot Body */}
+                   <rect x="60" y="130" width="80" height="40" rx="10" fill="url(#gradient2)" stroke="#aff0e6" strokeWidth="2"/>
+                   
+                   <defs>
+                     <linearGradient id="gradient1" x1="70" y1="50" x2="130" y2="120" gradientUnits="userSpaceOnUse">
+                       <stop stopColor="#aff0e6" stopOpacity="0.2"/>
+                       <stop offset="1" stopColor="#aff0e6" stopOpacity="0.05"/>
+                     </linearGradient>
+                     <linearGradient id="gradient2" x1="60" y1="130" x2="140" y2="170" gradientUnits="userSpaceOnUse">
+                       <stop stopColor="#aff0e6" stopOpacity="0.2"/>
+                       <stop offset="1" stopColor="#aff0e6" stopOpacity="0.05"/>
+                     </linearGradient>
+                   </defs>
+                </svg>
                 
-                {/* Fallback Overlay (in case Spline takes time to load) */}
-                <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black via-transparent to-transparent opacity-50"></div>
+                {/* Floating elements */}
+                <div className="absolute -top-2 -right-2 w-4 h-4 bg-[#aff0e6] rounded-full animate-bounce"></div>
+                <div className="absolute -bottom-2 -left-2 w-6 h-6 bg-[#aff0e6] rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                <div className="absolute top-1/2 -right-4 w-3 h-3 bg-[#aff0e6] rounded-full animate-bounce" style={{animationDelay: '0.4s'}}></div>
              </div>
 
              {/* Aesthetic Details around the frame */}
@@ -104,6 +132,15 @@ export default function PointSolutionsPage() {
              <div className="absolute bottom-6 right-6 px-4 py-2 bg-black/60 backdrop-blur-md rounded-lg border border-[#aff0e6]/20 text-[#aff0e6] text-xs font-mono">
                 System Status: ONLINE
              </div>
+             
+             {/* Animated grid background */}
+             <div className="absolute inset-0 opacity-10">
+                <div className="absolute inset-0" style={{
+                  backgroundImage: `linear-gradient(to right, #aff0e6 1px, transparent 1px),
+                                  linear-gradient(to bottom, #aff0e6 1px, transparent 1px)`,
+                  backgroundSize: '50px 50px'
+                }}></div>
+             </div>
           </motion.div>
 
         </div>
@@ -112,7 +149,7 @@ export default function PointSolutionsPage() {
   );
 }
 
-// --- ACCORDION COMPONENT ---
+// --- ACCORDION COMPONENT (unchanged) ---
 
 const AccordionItem = ({ title, children, number, isOpen: defaultOpen = false }: { title: string, children: React.ReactNode, number: string, isOpen?: boolean }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
