@@ -3,15 +3,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-const transition = {
-  type: "spring",
-  mass: 0.5,
-  damping: 11.5,
-  stiffness: 100,
-  restDelta: 0.001,
-  restSpeed: 0.001,
-};
-
 export const MenuItem = ({
   setActive,
   active,
@@ -35,12 +26,12 @@ export const MenuItem = ({
         <motion.div
           initial={{ opacity: 0, scale: 0.85, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={transition}
+          transition={{ type: "spring", duration: 0.5 }}
         >
           {active === item && (
             <div className="absolute left-1/2 top-[calc(100%_+_1.2rem)] -translate-x-1/2 transform pt-4">
               <motion.div
-                transition={transition}
+                transition={{ type: "spring", duration: 0.5 }}
                 layoutId="active"
                 className="overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 shadow-xl shadow-black/50 backdrop-blur-sm"
               >
